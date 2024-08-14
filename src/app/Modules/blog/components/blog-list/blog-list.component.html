@@ -1,0 +1,7 @@
+<div *ngFor="let blog of blogs">
+  <app-blog-item 
+    [blogInput]="blog" 
+    (edit)="edit($event)" 
+    (delete)="delete($event)">
+  </app-blog-item>
+</div>
