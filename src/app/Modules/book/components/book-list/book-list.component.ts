@@ -7,12 +7,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit{
+  booksServer: any;
   books: Book[] = [];
   isEditMode = false;
  constructor(private bookService: BookService, private router: Router,private route: ActivatedRoute) { }
  
  ngOnInit (): void {
   this.books = this.bookService.getBooks();
+  this.loadBlogs()
 }
 
 
@@ -34,4 +36,10 @@ actionType = (action: any) => {
   }
 }
 
+loadBlogs(): void {
+  this.bookService.getBooksFromServer().subscribe(data => {
+    this.booksServer = data;
+  });
+
+}
 }

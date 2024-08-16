@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     BlogRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class BlogModule { }

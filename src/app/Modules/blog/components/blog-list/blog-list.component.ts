@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BlogService, Blog } from '../../service/blog.service';
 import { Router } from '@angular/router';
 @Component({
@@ -6,12 +6,14 @@ import { Router } from '@angular/router';
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.scss']
 })
-export class BlogListComponent {
+export class BlogListComponent implements OnInit{
   blogs: Blog[] = [];
+  blogsServer: any;
  constructor(private blogService: BlogService, private router: Router) { }
 
  ngOnInit(): void {
   this.blogs = this.blogService.getBlogs();
+  this.loadBlogs()
 }
 
 getBook = (blogService: BlogService) =>{
@@ -34,5 +36,10 @@ actionType = (action: any) => {
   }else if(action === 'delete'){
     console.log('delete');
   }
+}
+loadBlogs(): void {
+  this.blogService.getBlogsFromServer().subscribe(data => {
+    this.blogsServer = data;
+  });
 }
 }

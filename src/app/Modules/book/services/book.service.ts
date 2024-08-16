@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export interface Book {
   id: number;
@@ -10,16 +12,23 @@ export interface Book {
 @Injectable({
   providedIn: 'root'
 })
-export class BookService {
 
+export class BookService {
+  private serverUrl = 'http://localhost:3000/books';
   private books: Book[] = [
     { id: 1, name: 'Sample Book Name 1', authors: 'Author 1', isbn: '1234567890' },
     { id: 2, name: 'Sample Book Name 2', authors: 'Author 2', isbn: '0987654321' }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getBooks(): Book[] {
     return this.books;
+  }
+
+getBooksFromServer= () => {
+  return this.http
+  .get(this.serverUrl)
+  .pipe(tap((data) => console.log(data)));
   }
 }
