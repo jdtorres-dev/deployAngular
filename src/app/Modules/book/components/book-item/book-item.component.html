@@ -1,8 +1,10 @@
+<body><br>
 <div>
     <h3>{{ book?.name }}</h3>
     <p>Authors: {{ book?.authors }}</p>
     <p>ISBN: {{ book?.isbn }}</p>
-    <button (click)="Edit()">Edit</button>
-    <button (click)="Delete()">Delete</button>
+    <button class="btn btn-info" (click)="Edit()">Edit</button> &nbsp;
+    <button class="btn btn-danger" (click)="Delete()">Delete</button>
   </div>
+</body>
   

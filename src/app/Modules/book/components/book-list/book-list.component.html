@@ -1,7 +1,11 @@
-<div *ngFor="let book of books">
+<body>
+  <br>
+<div *ngFor="let book of books" [ngClass]="{'div': true}">
     <app-book-item 
       [bookInput]="book" 
       (edit)="edit($event)" 
       (delete)="delete($event)">
     </app-book-item>
-  </div>
+  </div><br><br>
+<div [ngClass]="{'div': true}"><app-command-bar (actionTriggered)="actionType($event)"></app-command-bar></div>
+</body>

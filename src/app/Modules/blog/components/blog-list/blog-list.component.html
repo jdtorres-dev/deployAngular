@@ -1,7 +1,8 @@
-<div *ngFor="let blog of blogs">
-  <app-blog-item 
-    [blogInput]="blog" 
-    (edit)="edit($event)" 
-    (delete)="delete($event)">
-  </app-blog-item>
-</div>
+<body>
+  <br>
+  <div *ngFor="let blog of blogs" class="myDiv"  [ngClass]="{'div': true}">
+    <app-blog-item [blogInput]="blog" (edit)="edit($event)" (delete)="delete($event)">
+    </app-blog-item>
+  </div><br><br>
+  <div [ngClass]="{'div': true}"><app-command-bar (actionTriggered)="actionType($event)"></app-command-bar></div>
+</body> 
