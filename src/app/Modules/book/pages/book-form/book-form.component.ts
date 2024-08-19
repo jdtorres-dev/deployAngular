@@ -7,34 +7,43 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.scss']
 })
-export class BookFormComponent implements OnInit{
+export class BookFormComponent {
   bookForm: FormGroup;
   authorArray: FormArray;
   bookId: number | null = null;
- 
+  books: Book[] = [];
+  isUpdateMode: boolean = false;
+
   constructor(private bookService: BookService, private fb: FormBuilder,
-    private route: ActivatedRoute)
-    {
+    private route: ActivatedRoute) {
     this.bookForm = this.fb.group({
-      name:['',[Validators.required]],
+      id: this.generateId,
+      name: ['', [Validators.required]],
       authors: this.fb.array(['']),
-      isbn:['',[Validators.required]]
+      isbn: ['', [Validators.required]]
     });
     this.authorArray = this.bookForm.controls['authors'] as FormArray
   }
+
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.bookId = params['id'];
-      if (params['id']) {
-        this.loadBook(params['id']);
+      if (this.bookId) {
+        this.isUpdateMode = true;
+        this.loadBook(this.bookId);
       }
     }
-  );
-  console.log(this.bookId)
+    )
   }
   onSubmit = () => {
-    const book: Book = this.bookForm.getRawValue() as Book;
-    console.log('form', this.bookForm.getRawValue());
+    if (this.bookForm.valid) {
+      const bookValue: Book = this.bookForm.value;
+      if(this.isUpdateMode){
+        this.updateBook(bookValue)
+      }else{
+      this.addBook(bookValue);
+      }
+    }
   };
 
   addAuthor = () => {
@@ -43,17 +52,33 @@ export class BookFormComponent implements OnInit{
 
   deleteAuthor = (index: number) => {
     this.authorArray.removeAt(index);
-  };
+  }
 
-  loadBook(id: number): void {
-    const book = this.bookService.getBookById(id);
-    if (book) {
-      this.bookForm.patchValue({
-        name: book.name,
-        isbn: book.isbn
-      });
-      this.authorArray.clear();
-      book.authors.forEach(author => this.authorArray.push(new FormControl(author, Validators.required)));
+  loadBook = (id: any) => {
+    this.bookService.getBookById(id).subscribe(book => {
+      if (book) {
+        this.bookForm.patchValue({
+          id: book.id,
+          name: book.name,
+          isbn: book.isbn,
+        });
+        book.authors.forEach(author => this.authorArray.push(new FormControl(author, Validators.required)));
+      }
     }
+    )
+  }
+
+  addBook = (newBook: Book) => {
+    this.bookService.addBook(newBook).subscribe(
+      (book) => console.log(book))
+  }
+
+  updateBook = (updatedBook: Book) => {
+    this.bookService.updateBook(updatedBook).subscribe(
+      (book) => console.log(book))
+  }
+
+  generateId(): number {
+    return Math.floor(Math.random() * 1000000)
   }
 }

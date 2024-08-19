@@ -12,20 +12,25 @@ export class BlogListComponent implements OnInit{
  constructor(private blogService: BlogService, private router: Router) { }
 
  ngOnInit(): void {
-  this.blogs = this.blogService.getBlogs();
-  this.loadBlogs()
+  this.getBlogs()
 }
-
-getBook = (blogService: BlogService) =>{
-  this.blogs = blogService.getBlogs();
+getBlogs(): void {
+  this.blogService.getBlogsFromServer()
+    .subscribe(blogs => this.blogs = blogs);
 }
 
 edit = (blog: Blog) => {
   console.log(`Edit Blog Title: ${blog.title} with id: ${blog.id}`);
-  this.router.navigate(['/blog/blog-form'])
+  this.router.navigate(['/blog/blog-form'],{ queryParams: { id: blog.id } })
 }
 
+//delete function need to refresh the page to reflect the changes
 delete = (blog: Blog) => {
+  this.blogService.deleteBlog(blog.id).subscribe(
+    () => {
+      this.blogs = this.blogs.filter(blog => blog.id === blog.id)
+    }
+  )
   console.log(`Delete Blog Title: ${blog.title} with id: ${blog.id}`);
 }
 
@@ -36,10 +41,5 @@ actionType = (action: any) => {
   }else if(action === 'delete'){
     console.log('delete');
   }
-}
-loadBlogs(): void {
-  this.blogService.getBlogsFromServer().subscribe(data => {
-    this.blogsServer = data;
-  });
 }
 }

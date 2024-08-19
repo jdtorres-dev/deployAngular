@@ -1,35 +1,40 @@
 {
-    "books": [
-        {
-            "name": "Harry Potter",
-            "authors": "J.K. Rowling",
-            "isbn":"1234567890"
-        },
-        {
-            "title": "Sleep Walker",
-            "authors": "The Sample Author",
-            "isbn":"1234512345"
-        }
-    ],
-    "blogs": [
-        {
-            "title": "Blog 1",
-            "description": "My Blog 1",
-            "author": "The Author 1",
-            "comment":"Dump dump dump"
-        },
-        {
-            "title": "Blog 2",
-            "description": "My Blog 2",
-            "author": "The Author 2",
-            "comment":"Dump dump dump"
-        }
-    ],
-    "users": [
-        {
-          "id": 1,
-          "username": "admin",
-          "password": "12345"
-        }
+  "books": [
+    {
+      "id": "b1c4",
+      "name": "sample book name",
+      "authors": [
+        "sample author"
+      ],
+      "isbn": "1234151512"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "1",
+      "title": "Blog 1",
+      "description": "My Blog 1",
+      "author": "The Author 1",
+      "comment": [
+        "Dump dump dump",
+        "Dump2 dump2 dump2"
       ]
+    },
+    {
+      "id": "12",
+      "title": "sample blog title",
+      "description": "sample blog desc",
+      "author": "author1",
+      "comments": [
+        "dummy"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "12345"
+    }
+  ]
 }
