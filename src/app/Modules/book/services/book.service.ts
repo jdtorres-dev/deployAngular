@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 export interface Book {
   id: number;
   name: string;
-  authors: string;
+  authors: string[];
   isbn: string;
 }
 
@@ -16,8 +16,8 @@ export interface Book {
 export class BookService {
   private serverUrl = 'http://localhost:3000/books';
   private books: Book[] = [
-    { id: 1, name: 'Sample Book Name 1', authors: 'Author 1', isbn: '1234567890' },
-    { id: 2, name: 'Sample Book Name 2', authors: 'Author 2', isbn: '0987654321' }
+    { id: 1, name: 'Sample Book Name 1', authors: ['Author A', 'Author B'], isbn: '1234567890' },
+    { id: 2, name: 'Sample Book Name 2', authors: ['Author 2'], isbn: '0987654321' }
   ];
 
   constructor(private http: HttpClient) { }
@@ -30,5 +30,9 @@ getBooksFromServer= () => {
   return this.http
   .get(this.serverUrl)
   .pipe(tap((data) => console.log(data)));
+  }
+
+  getBookById(id: number): Book | undefined {
+    return this.books.find(book => book.id === id);
   }
 }

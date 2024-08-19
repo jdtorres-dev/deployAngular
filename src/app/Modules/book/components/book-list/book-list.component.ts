@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService, Book } from '../../services/book.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -9,8 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class BookListComponent implements OnInit{
   booksServer: any;
   books: Book[] = [];
-  isEditMode = false;
- constructor(private bookService: BookService, private router: Router,private route: ActivatedRoute) { }
+ constructor(private bookService: BookService, private router: Router) { }
  
  ngOnInit (): void {
   this.books = this.bookService.getBooks();
@@ -20,7 +19,7 @@ export class BookListComponent implements OnInit{
 
 edit = (book: Book) => {
   console.log(`Edit Book Name: ${book.name} with Id: ${book.id}`);
-  this.router.navigate(['/book/book-form'])
+  this.router.navigate(['/book/book-form'], { queryParams: { id: book.id } })
 }
 
 delete = (book: Book) => {

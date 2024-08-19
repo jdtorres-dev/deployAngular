@@ -24,5 +24,12 @@
             "author": "The Author 2",
             "comment":"Dump dump dump"
         }
-    ]
+    ],
+    "users": [
+        {
+          "id": 1,
+          "username": "admin",
+          "password": "12345"
+        }
+      ]
 }
