@@ -6,6 +6,7 @@ import { BookItemComponent } from './components/book-item/book-item.component';
 import { SharedModule } from 'src/app/Shared/shared.module';
 import { BookFormComponent } from './pages/book-form/book-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule, LabelModule } from 'my-own-lib-dev';
 @NgModule({
   declarations: [
     BookListComponent,
@@ -13,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BookFormComponent
   ],
   imports: [
+    LabelModule,
+    ButtonModule,
     CommonModule,
     BookRoutingModule,
     SharedModule,

@@ -6,13 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './Shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './Modules/login/components/login/login.component';
-
+import { MyOwnLibDevModule } from 'my-own-lib-dev';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent
   ],
   imports: [
+    MyOwnLibDevModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

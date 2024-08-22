@@ -3,25 +3,25 @@
     <h1>Book Form</h1>
     <form [formGroup]="bookForm" class="container" (ngSubmit)="onSubmit()">
         <div>
-            <label for="name">Name</label>
+            <nx-lib-label for="name" text="Name" color="blue" fontSize="16px" fontWeight="bold"></nx-lib-label>
             <input formControlName="name" id="name" type="text" class="form-control" />
         </div>
         <ng-container formArrayName="authors">
-            <label for="authors">Authors</label>
+            <nx-lib-label for="authors" text="Authors" color="blue" fontSize="16px" fontWeight="bold"></nx-lib-label>
             <div class="input-group mb-3" *ngFor="let author of authorArray.controls; index as i">
                 <input [formControlName]="i" class="form-control">
                 &nbsp;&nbsp;
                 <button class="btn btn-danger" (click)="deleteAuthor(i)">Delete</button>
             </div>
             &nbsp;&nbsp;
-            <button type="button" (click)="addAuthor()" class="btn btn-info">
-                Add Author
-            </button><br><br>
+            <nx-lib-button label="Add Author" color="secondary" type="button" (click)="addAuthor()"></nx-lib-button>
+            <br><br>
         </ng-container>
         <div>
-            <label for="isbn">ISBN</label>
-            <input formControlName="isbn" id="isbn" type="text" class="form-control" />
+        <nx-lib-label for="isbn" text="ISBN" color="blue" fontSize="16px" fontWeight="bold"></nx-lib-label>
+        <input formControlName="isbn" id="isbn" type="text" class="form-control"/>
         </div><br>
-        <button class="btn btn-info" type="submit">Submit</button>
+        <!-- <button class="btn btn-info" type="submit">Submit</button> -->
+        <nx-lib-button label="Submit" color="primary" type="submit"></nx-lib-button>
     </form>
 </body>
